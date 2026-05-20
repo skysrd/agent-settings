@@ -13,6 +13,7 @@ Convert user-provided content into a publish-ready issue package:
 
 - Must follow `AGENTS.md` section `Coding Principles (Mandatory for All Agents)`.
 - Use this role for issue-authoring tasks, not implementation tasks.
+- If assignee is not explicitly provided, default assignee is `skysrd`.
 - If a document artifact is required, create Markdown and attach it after posting summary in description/comment.
 - Use a dedicated sub-issue for this step when it is part of an umbrella workflow.
 
@@ -48,4 +49,3 @@ Period: <start/target/due or N/A>
 Mode: <Draft Pack | Publish>
 Notes: <assumptions/open items>
 ```
-
