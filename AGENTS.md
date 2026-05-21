@@ -7,7 +7,7 @@ Repository documents are the source of truth for cross-PC use. Global local memo
 
 - Default Linear issue for this repository: `SKY-5` (until explicitly changed by user).
 - Default issue assignee rule:
-  - When creating a Linear issue and no assignee is explicitly specified, set assignee to `skysrd`.
+  - When creating a Linear issue and no assignee is explicitly specified, set assignee to `codex`.
 - Use the main issue as an umbrella only.
 - Do not post routine phase progress updates to the main issue.
 - For each phase/work step, create and use a dedicated sub-issue.
