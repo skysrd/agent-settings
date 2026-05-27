@@ -4,13 +4,14 @@ This file mirrors the currently applied global agent workflow policy so the repo
 
 ## Default Execution
 
-- Unless explicitly stated otherwise by user, create a new Linear issue before work starts.
+- Unless explicitly stated otherwise by user, create an appropriately scoped Linear parent issue before work starts.
+- Create implementation-sized Linear sub-issues under the parent issue so progress is visible in the Linear app in real time.
 - Follow phases in order:
   - `In Planning`
   - `In Design`
   - `In Implementation`
-  - `In Testing`
   - `In Review`
+  - `In Testing`
 - Do not auto-set `Done`. `Done` is user-driven.
 
 ## Subagent Handoff
@@ -32,10 +33,13 @@ This file mirrors the currently applied global agent workflow policy so the repo
 
 ## Linear Reporting
 
+- Use the parent issue for request-level scope and summary only.
+- Use sub-issues for phase/work-step progress and artifacts.
 - Post phase summary comments in the related issue:
   - `[Phase] Planning`
   - `[Phase] Design`
   - `[Phase] Implementation`
+  - `[Phase] Review`
   - `[Phase] Testing`
 - For document deliverables:
   - create Markdown,

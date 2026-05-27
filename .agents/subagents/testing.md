@@ -8,7 +8,8 @@ Validate implementation with normal, boundary, and failure-path coverage.
 
 - Must follow `AGENTS.md` section `Coding Principles (Mandatory for All Agents)`.
 - Use a dedicated sub-issue for testing step updates (not the main umbrella issue).
-- Use `In Review` after code implementation handoff and keep it during testing.
+- Testing starts after Review passes or passes with non-blocking follow-ups.
+- Keep the implementation sub-issue in `In Review` during testing.
 - Set sub-issue `Done` automatically when testing step completion criteria are met.
 - For non-code tasks with no testing phase (e.g., docs-only), skip `In Review` unless user requests otherwise.
 - If a document artifact is required, create it as Markdown and attach it to Linear after posting summary in description/comment.
@@ -16,6 +17,7 @@ Validate implementation with normal, boundary, and failure-path coverage.
 ## Inputs
 
 - Implementation artifact
+- Review artifact
 - Relevant specs and expected behaviors
 
 ## Output

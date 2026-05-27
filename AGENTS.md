@@ -5,27 +5,30 @@ Repository documents are the source of truth for cross-PC use. Global local memo
 
 ## 1. Issue Mapping and Status Automation
 
-- Default Linear issue for this repository: `SKY-5` (until explicitly changed by user).
+- Do not use a fixed repository-wide umbrella issue by default.
+- For each user request, group the requested work into an appropriately scoped Linear parent issue so the user can track the overall goal in the Linear app.
+- Create implementation-sized Linear sub-issues under that parent issue for concrete work units that should be tracked independently.
 - Default issue assignee rule:
   - When creating a Linear issue and no assignee is explicitly specified, set assignee to `codex`.
-- Use the main issue as an umbrella only.
-- Do not post routine phase progress updates to the main issue.
+- Use the parent issue as an umbrella for that request only.
+- Do not post routine phase progress updates to the parent issue.
 - For each phase/work step, create and use a dedicated sub-issue.
 - Work start rule:
   - When implementation work begins, set the active sub-issue status to `In Progress`.
 - Review handoff rule:
   - When code implementation is complete, set the active sub-issue status to `In Review`.
-  - Then start testing/validation.
+  - Run the Review phase before testing/validation.
+  - If Review finds blocking defects, return to Implementation and update the active implementation sub-issue.
 - Work completion rule:
   - Sub-issue `Done` is set automatically by agent when its step is complete.
-  - Main issue `Done` is still user-driven unless explicitly requested.
+  - Parent issue `Done` is still user-driven unless explicitly requested.
 - Reporting rule:
   - Every phase updates its own sub-issue with artifact summary.
 
 ## 2. Standard SubAgent Workflow
 
 - `Issue Publishing` (optional, for issue authoring/publishing)
-- `Planning` -> `Design` -> `Implementation` -> `Testing`
+- `Planning` -> `Design` -> `Implementation` -> `Review` -> `Testing`
 - Do not skip handoff artifacts between phases.
 - If scope changes, go back to `Planning` and update artifacts.
 
@@ -37,6 +40,7 @@ SubAgent role guides are stored at:
 - `.agents/subagents/planning.md`
 - `.agents/subagents/design.md`
 - `.agents/subagents/implementation.md`
+- `.agents/subagents/review.md`
 - `.agents/subagents/testing.md`
 
 ## 4. Required Artifacts by Phase
@@ -55,6 +59,11 @@ SubAgent role guides are stored at:
   - Changed files
   - Key logic changes
   - Deferred work / tradeoffs
+- Review artifact:
+  - Findings ordered by severity
+  - File/line references
+  - Required fixes vs non-blocking follow-ups
+  - Review decision (`Pass`, `Pass with follow-ups`, or `Changes requested`)
 - Testing artifact:
   - Test matrix (normal + edge cases)
   - Executed commands
@@ -66,7 +75,7 @@ SubAgent role guides are stored at:
 Each phase must add one concise comment to its active sub-issue with this format:
 
 ```md
-[Phase] Planning | Design | Implementation | Testing
+[Phase] Planning | Design | Implementation | Review | Testing
 Summary: ...
 Artifacts: ...
 Decisions: ...
@@ -85,12 +94,13 @@ When a phase requires a document artifact:
 ## 6. State Transition Protocol
 
 - Main issue:
-  - Track umbrella scope only (no routine step logs).
-  - Do not auto-close main issue.
+  - Track the request-level umbrella scope only (no routine step logs).
+  - Do not auto-close the parent issue.
 - Sub-issue:
   - `Todo` -> `In Progress`: when that step starts
   - `In Progress` -> `In Review`: when implementation for that step is complete
-  - Keep `In Review` during testing/validation for that step
+  - Keep `In Review` during Review and testing/validation for that step
+  - Return to `In Progress` if Review requests blocking changes
   - `In Review` -> `Done`: auto by agent when step completion criteria are met
 - Exception:
   - For non-code tasks without a testing phase (e.g., documentation-only updates), sub-issue can move `In Progress` -> `Done`.
